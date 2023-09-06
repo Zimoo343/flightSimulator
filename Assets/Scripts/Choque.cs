@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Esta clase controla el comportamiento de colisión de un objeto con el tag "Choque".
+// Esta clase controla el comportamiento de colisiï¿½n de un objeto con el tag "Choque".
 public class Choque : MonoBehaviour
 {
-    // Variables públicas accesibles desde el inspector.
-    public AudioClip explosionSound; // Sonido de explosión.
+    // Variables pï¿½blicas accesibles desde el inspector.
+    public AudioClip explosionSound; // Sonido de explosiï¿½n.
     public GameObject gameOverUI; // Referencia al objeto de la interfaz de Game Over.
-    public ParticleSystem explosionParticles; // Partícula de explosión.
+    public ParticleSystem explosionParticles; // Partï¿½cula de explosiï¿½n.
 
     // Variables privadas para almacenar componentes y referencias.
     private MeshRenderer naveRenderer; // Referencia al MeshRenderer de la nave.
     private AudioSource audioSource; // Referencia al componente AudioSource.
 
-    // Método que se llama al inicio de la ejecución.
+    // Mï¿½todo que se llama al inicio de la ejecuciï¿½n.
     void Start()
     {
         // Obtener el MeshRenderer y AudioSource adjuntos al objeto.
@@ -22,7 +22,7 @@ public class Choque : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    // Método que se llama cuando ocurre una colisión con otro objeto.
+    // Mï¿½todo que se llama cuando ocurre una colisiï¿½n con otro objeto.
     void OnCollisionEnter(Collision collision)
     {
         // Verificar si el objeto con el que colisionamos tiene el tag "Choque".
@@ -34,32 +34,34 @@ public class Choque : MonoBehaviour
             // Detener el sonido de movimiento.
             audioSource.Stop();
 
-            // Detener las partículas de fuego de la nave.
+            // Detener las partï¿½culas de fuego de la nave.
             GetComponent<Nave>().fuego1.Stop();
             GetComponent<Nave>().fuego2.Stop();
+            GetComponent<Nave>().fuego3.Stop();
+            GetComponent<Nave>().fuego4.Stop();
 
             // Desactivar el Mesh Renderer de la nave para que no sea visible.
             naveRenderer.enabled = false;
 
-            // Reproducir el sonido de explosión si se proporcionó.
+            // Reproducir el sonido de explosiï¿½n si se proporcionï¿½.
             if (explosionSound != null)
             {
                 audioSource.PlayOneShot(explosionSound);
             }
 
-            // Reproducir la partícula de explosión si se proporcionó.
+            // Reproducir la partï¿½cula de explosiï¿½n si se proporcionï¿½.
             if (explosionParticles != null)
             {
                 explosionParticles.Play();
             }
 
-            // Mostrar la interfaz de Game Over si se proporcionó.
+            // Mostrar la interfaz de Game Over si se proporcionï¿½.
             if (gameOverUI != null)
             {
                 gameOverUI.SetActive(true);
             }
 
-            // Deshabilitar este script después de la colisión para que no se ejecute nuevamente.
+            // Deshabilitar este script despuï¿½s de la colisiï¿½n para que no se ejecute nuevamente.
             enabled = false;
         }
     }

@@ -20,6 +20,8 @@ public class GasolinaNave : MonoBehaviour
     private AudioSource audioSource; // AudioSource de la nave.
     private ParticleSystem fuego1; // Partícula de fuego de la nave.
     private ParticleSystem fuego2; // Otra partícula de fuego de la nave.
+    private ParticleSystem fuego3; // Partícula de fuego de la nave.
+    private ParticleSystem fuego4; // Otra partícula de fuego de la nave.
     private MeshRenderer naveRenderer; // Renderer de la nave.
     private bool gasolinaVacia = false; // Indicador de si la gasolina se ha agotado.
     private bool gameEnded = false; // Indicador de si el juego ha terminado.
@@ -44,6 +46,17 @@ public class GasolinaNave : MonoBehaviour
         {
             fuego2 = nave.fuego2;
             fuego2.Stop();
+        }
+        if (nave.fuego3 != null)
+        {
+            fuego3 = nave.fuego3;
+            fuego3.Stop();
+        }
+
+        if (nave.fuego4 != null)
+        {
+            fuego4 = nave.fuego4;
+            fuego4.Stop();
         }
 
         // Detener las partículas de explosión al inicio.
@@ -132,6 +145,15 @@ public class GasolinaNave : MonoBehaviour
         {
             fuego2.Stop();
         }
+        if (fuego3 != null)
+        {
+            fuego3.Stop();
+        }
+
+        if (fuego4 != null)
+        {
+            fuego4.Stop();
+        }
 
         // Deshabilitar el renderer de la nave.
         if (naveRenderer != null)
@@ -148,7 +170,7 @@ public class GasolinaNave : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         // Si colisiona con un objeto de tag "Gasolina", aumentar la gasolina y reproducir el sonido.
-        if (collision.gameObject.CompareTag("Gasolina"))
+        if (collision.gameObject.CompareTag("coaxium"))
         {
             gasolinaActual += 20.0f;
             gasolinaActual = Mathf.Clamp(gasolinaActual, 0f, maxGasolina);
